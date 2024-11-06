@@ -1,8 +1,6 @@
 package mariana.thePotteryPlace.dto;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import mariana.thePotteryPlace.model.Order;
@@ -12,6 +10,10 @@ import java.math.BigDecimal;
 
 @Data
 public class OrderItemDTO {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @ManyToOne
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     private Order order;

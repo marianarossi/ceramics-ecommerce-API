@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: thePotteryPlace
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/thepotteryplace
+    username: root
+    password: 2201
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

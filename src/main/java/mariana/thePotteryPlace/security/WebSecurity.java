@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -51,11 +52,18 @@ public class WebSecurity {
 
         http.authorizeHttpRequests(authorizeRequests ->
                 authorizeRequests
-                        .requestMatchers(antMatcher("/h2-console")).permitAll()
+                        .requestMatchers(antMatcher("/h2-console/**")).permitAll()
                         .requestMatchers(antMatcher(HttpMethod.POST, "/users/**")).permitAll()
+                        .requestMatchers(antMatcher(HttpMethod.POST, "/error/**")).permitAll()
+                        .requestMatchers(antMatcher(HttpMethod.GET, "/users/**")).permitAll()
                         //no projeto, precisa listar sem estar cadastrado
                         .anyRequest().authenticated());
-        http.authenticationManager(authenticationManager).addFilter(new JWTAuthenticationFilter());
+        http.authenticationManager(authenticationManager)
+                .addFilter(new JWTAuthenticationFilter(authenticationManager, authService))
+                .addFilter(new JWTAuthorizationFilter(authenticationManager, authService))
+                .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                //session id: id no client, id no server, contem navegador, quem esta acessando. é resetado de acordo com o tempo definido pelo server,
+        //stateless - id de sessao por tempo n existe, sempre é unica
         return http.build();
     }
 
