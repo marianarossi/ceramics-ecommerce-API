@@ -10,8 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.Serializable;
 import java.util.List;
 
-public abstract class CrudServiceImpl<T, ID extends Serializable>
-        implements ICrudService<T, ID> {
+public abstract class CrudServiceImpl<T, ID extends Serializable> implements ICrudService<T, ID> {
 
     protected abstract JpaRepository<T, ID> getRepository();
 

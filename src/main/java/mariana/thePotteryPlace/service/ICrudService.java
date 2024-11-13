@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.util.List;
 
 public interface ICrudService<T, ID extends Serializable> {
-
     List<T> findAll();
     List<T> findAll(Sort sort);
     Page<T> findAll(Pageable pageable);
@@ -22,5 +21,4 @@ public interface ICrudService<T, ID extends Serializable> {
     void delete(ID id);
     void delete(Iterable<? extends T> iterable);
     void deleteAll();
-
 }

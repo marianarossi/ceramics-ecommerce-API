@@ -23,4 +23,6 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+    //add tipo pagamento
+    //add endereco
 }

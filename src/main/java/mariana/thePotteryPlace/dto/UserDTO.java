@@ -5,13 +5,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import mariana.thePotteryPlace.model.Address;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 
-import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 @Data
 public class UserDTO {
@@ -22,7 +17,7 @@ public class UserDTO {
 
     @NotNull(message = "User can't be null.")
     @Size(min = 4, max = 50)
-    private String username;
+    private String email;
 
     @NotNull
     @Size(min = 4, max = 50)
@@ -46,6 +41,4 @@ public class UserDTO {
     @NotNull
     private String phone;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Address> addresses;
 }

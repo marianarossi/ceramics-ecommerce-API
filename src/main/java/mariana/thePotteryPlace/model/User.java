@@ -13,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "tb_user")
@@ -29,7 +28,7 @@ public class User implements UserDetails {
 
     @NotNull(message = "User can't be null.")
     @Size(min = 4, max = 50)
-    private String username;
+    private String email;
 
     @NotNull
     @Size(min = 4, max = 50)
@@ -45,6 +44,11 @@ public class User implements UserDetails {
         return AuthorityUtils.createAuthorityList("ROLE_USER");
     }
 
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
     @NotNull
     @Size(min = 9) //max?
     private String ssn;
@@ -57,7 +61,4 @@ public class User implements UserDetails {
 
     @NotNull
     private String phone;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Address> addresses;
 }

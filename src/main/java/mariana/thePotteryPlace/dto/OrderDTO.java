@@ -6,6 +6,7 @@ import lombok.Data;
 import mariana.thePotteryPlace.model.User;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class OrderDTO {
@@ -18,4 +19,8 @@ public class OrderDTO {
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    List<OrderItemDTO> items;
+    //securityContextHolder
+    //pegar usuario logado spring security
 }

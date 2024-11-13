@@ -2,14 +2,14 @@ package mariana.thePotteryPlace.controller;
 
 import mariana.thePotteryPlace.dto.ProductDTO;
 import mariana.thePotteryPlace.model.Product;
-import mariana.thePotteryPlace.service.ICrudService;
+import mariana.thePotteryPlace.service.IListService;
 import mariana.thePotteryPlace.service.IProductService;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("products")
-public class ProductController extends CrudController<Product, ProductDTO, Long> {
+public class ProductController extends ListController<Product, ProductDTO, Long> {
 
     private final IProductService productService;
     private final ModelMapper modelMapper;
@@ -21,7 +21,7 @@ public class ProductController extends CrudController<Product, ProductDTO, Long>
     }
 
     @Override
-    protected ICrudService<Product, Long> getService() {
+    protected IListService<Product, Long> getService() {
         return this.productService;
     }
 

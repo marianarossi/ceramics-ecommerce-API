@@ -5,6 +5,7 @@ import mariana.thePotteryPlace.model.Address;
 import mariana.thePotteryPlace.service.IAddressService;
 import mariana.thePotteryPlace.service.ICrudService;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +20,11 @@ public class AddressController extends CrudController<Address, AddressDTO, Long>
         super(Address.class, AddressDTO.class);
         this.addressService = addressService;
         this.modelMapper = modelMapper;
+    }
+
+    @Override
+    public ResponseEntity<AddressDTO> create(AddressDTO entity) {
+        return ResponseEntity.ok(addressService.saveCompleteAddress(entity));
     }
 
     @Override
