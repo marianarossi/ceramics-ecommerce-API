@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CategoryServiceImpl extends CrudServiceImpl<Category, Long> implements ICategoryService {
+public class CategoryServiceImpl extends ListServiceImpl<Category, Long> implements ICategoryService {
     private final CategoryRepository categoryRepository;
 
     public CategoryServiceImpl(CategoryRepository categoryRepository) {

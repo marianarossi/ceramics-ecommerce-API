@@ -1,15 +1,15 @@
 package mariana.thePotteryPlace.dto;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import mariana.thePotteryPlace.model.User;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor //precisa?
 public class AddressDTO {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -36,7 +36,6 @@ public class AddressDTO {
     @NotNull
     private String zip;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    //anotacao do banco aqui?
     private User user;
 }

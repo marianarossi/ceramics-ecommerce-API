@@ -8,6 +8,8 @@ import mariana.thePotteryPlace.service.IAddressService;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AddressServiceImpl extends CrudServiceImpl<Address, Long> implements IAddressService {
     private final AddressRepository addressRepository;
@@ -33,6 +35,12 @@ public class AddressServiceImpl extends CrudServiceImpl<Address, Long> implement
         addressRepository.save(address);
         return addressDTO;
     }
+
+    public List<Address> findAddressesByUser() {
+        Long authenticatedUserId = authService.getAuthenticatedUser().getId();
+        return addressRepository.findByUser_Id(authenticatedUserId);
+    }
+
     @Override
     protected JpaRepository<Address, Long> getRepository() {
         return addressRepository;

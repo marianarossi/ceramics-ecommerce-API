@@ -1,18 +1,17 @@
 package mariana.thePotteryPlace.dto;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.util.Date;
+import lombok.NoArgsConstructor;
+import java.time.LocalDate;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor //precisa?
 public class UserDTO {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull(message = "User can't be null.")
@@ -21,7 +20,7 @@ public class UserDTO {
 
     @NotNull
     @Size(min = 4, max = 50)
-    private String name;
+    private String displayName;
 
     @NotNull
     @Size(min = 6)
@@ -33,12 +32,11 @@ public class UserDTO {
     private String ssn;
 
     @NotNull
-    private Date birthDate;
+    private LocalDate birthDate;
 
     @NotNull
     private String gender;
 
     @NotNull
     private String phone;
-
 }

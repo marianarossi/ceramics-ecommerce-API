@@ -1,24 +1,22 @@
 package mariana.thePotteryPlace.dto;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import mariana.thePotteryPlace.model.Order;
 import mariana.thePotteryPlace.model.Product;
 
 import java.math.BigDecimal;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor //precisa?
 public class OrderItemDTO {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id", referencedColumnName = "id")
     private Order order;
 
-    @OneToOne
     private Product product;
 
     @NotNull

@@ -11,8 +11,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 
 @Entity
 @Table(name = "tb_user")
@@ -28,11 +28,12 @@ public class User implements UserDetails {
 
     @NotNull(message = "User can't be null.")
     @Size(min = 4, max = 50)
+    @Column(unique = true, nullable = false)
     private String email;
 
     @NotNull
     @Size(min = 4, max = 50)
-    private String name;
+    private String displayName;
 
     @NotNull
     @Size(min = 6)
@@ -54,7 +55,7 @@ public class User implements UserDetails {
     private String ssn;
 
     @NotNull
-    private Date birthDate;
+    private LocalDate birthDate;
 
     @NotNull
     private String gender;

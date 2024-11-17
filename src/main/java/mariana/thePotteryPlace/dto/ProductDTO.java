@@ -1,18 +1,18 @@
 package mariana.thePotteryPlace.dto;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import mariana.thePotteryPlace.model.Category;
 
 import java.math.BigDecimal;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor //precisa?
 public class ProductDTO {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -55,7 +55,5 @@ public class ProductDTO {
     @NotNull
     private String img3;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 }

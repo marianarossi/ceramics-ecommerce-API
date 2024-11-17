@@ -1,26 +1,29 @@
 package mariana.thePotteryPlace.dto;
-
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import mariana.thePotteryPlace.model.Address;
 import mariana.thePotteryPlace.model.User;
-
-import java.util.Date;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor //precisa?
 public class OrderDTO {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
-    private Date date;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
+    @NotNull
+    private BigDecimal shipping;
+
+    @NotNull
+    private String payment;
+
+    @NotNull
+    private Address address;
+
     List<OrderItemDTO> items;
-    //securityContextHolder
-    //pegar usuario logado spring security
 }

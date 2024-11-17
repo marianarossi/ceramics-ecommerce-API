@@ -14,4 +14,5 @@ public class ThePotteryPlaceApplication {
 	//controller de order - sobrescrever o list all - listar so do usuario que ta autenticado
 	//criar os 5 testes
 	//arrumar os dtos (responseDTO
+	//alterar order - adicionar endereco, pagamento, frete
 }

@@ -14,20 +14,26 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class ListController <T, D, ID extends Serializable> {
+public abstract class ListController <T, D, R, ID extends Serializable> {
     protected abstract IListService<T, ID> getService();
     protected abstract ModelMapper getModelMapper();
 
     private final Class<T> typeClass;
     private final Class<D> typeDtoClass;
+    private final Class<R> typeResponseDtoClass;
 
-    public ListController(Class<T> typeClass, Class<D> typeDtoClass) {
+    public ListController(Class<T> typeClass, Class<D> typeDtoClass, Class<R> typeResponseDtoClass) {
         this.typeClass = typeClass;
         this.typeDtoClass = typeDtoClass;
+        this.typeResponseDtoClass = typeResponseDtoClass;
     }
 
     private D convertToDto(T entity) {
         return getModelMapper().map(entity, this.typeDtoClass);
+    }
+
+    private R convertToResponseDto(T entity) {
+        return getModelMapper().map(entity, this.typeResponseDtoClass);
     }
 
     private T convertToEntity(D entityDto) {
@@ -35,16 +41,14 @@ public abstract class ListController <T, D, ID extends Serializable> {
     }
 
     @GetMapping //http://ip.api:port/classname
-    public ResponseEntity<List<D>> findAll() {
+    public ResponseEntity<List<R>> findAll() {
         return ResponseEntity.ok(
-                getService().findAll().stream().map(
-                        this::convertToDto).collect(Collectors.toList()
-                )
+                getService().findAll().stream().map(this::convertToResponseDto).collect(Collectors.toList())
         );
     }
 
     @GetMapping("page")  //http://ip.api:port/classname/page
-    public ResponseEntity<Page<D>> findAll(
+    public ResponseEntity<Page<R>> findAll(
             @RequestParam int page,
             @RequestParam int size,
             @RequestParam(required = false) String order,
@@ -56,15 +60,15 @@ public abstract class ListController <T, D, ID extends Serializable> {
                     asc ? Sort.Direction.ASC : Sort.Direction.DESC, order);
         }
         return ResponseEntity.ok(
-                getService().findAll(pageRequest).map(this::convertToDto)
+                getService().findAll(pageRequest).map(this::convertToResponseDto)
         );
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<D> findOne(@PathVariable ID id) {
+    public ResponseEntity<R> findOne(@PathVariable ID id) {
         T entity = getService().findOne(id);
-        if ( entity != null) {
-            return ResponseEntity.ok(convertToDto(entity));
+        if (entity != null) {
+            return ResponseEntity.ok(convertToResponseDto(entity));
         } else {
             return ResponseEntity.noContent().build();
         }
