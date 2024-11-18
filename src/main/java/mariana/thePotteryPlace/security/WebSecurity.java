@@ -52,21 +52,9 @@ public class WebSecurity {
 
         http.authorizeHttpRequests(authorizeRequests ->
                 authorizeRequests
-                        .requestMatchers(antMatcher("/h2-console/**")).permitAll()
-                        .requestMatchers(antMatcher(HttpMethod.POST, "/users/**")).permitAll()
-                        .requestMatchers(antMatcher(HttpMethod.GET, "/addresses/**")).permitAll()
-                        .requestMatchers(antMatcher(HttpMethod.POST, "/addresses/**")).permitAll()
-                        .requestMatchers(antMatcher(HttpMethod.GET, "/categories/**")).permitAll()
-                        .requestMatchers(antMatcher(HttpMethod.POST, "/categories/**")).permitAll()
                         .requestMatchers(antMatcher(HttpMethod.GET, "/products/**")).permitAll()
-                        .requestMatchers(antMatcher(HttpMethod.POST, "/products/**")).permitAll()
-                        .requestMatchers(antMatcher(HttpMethod.GET, "/order/**")).permitAll()
-                        .requestMatchers(antMatcher(HttpMethod.POST, "/order/**")).permitAll()
-                        .requestMatchers(antMatcher(HttpMethod.GET, "/order-item/**")).permitAll()
-                        .requestMatchers(antMatcher(HttpMethod.POST, "/order-item/**")).permitAll()
-
+                        .requestMatchers(antMatcher(HttpMethod.GET, "/categories/**")).permitAll()
                         .requestMatchers(antMatcher(HttpMethod.POST, "/error/**")).permitAll()
-                        .requestMatchers(antMatcher(HttpMethod.GET, "/users/**")).permitAll()
                         //no projeto, precisa listar sem estar cadastrado
                         .anyRequest().authenticated());
         http.authenticationManager(authenticationManager)

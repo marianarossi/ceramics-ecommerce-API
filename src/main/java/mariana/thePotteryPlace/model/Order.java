@@ -41,8 +41,4 @@ public class Order {
     @NotNull
     private String payment;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference
-    private List<OrderItem> items;
-
 }

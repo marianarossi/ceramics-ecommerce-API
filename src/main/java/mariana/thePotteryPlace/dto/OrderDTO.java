@@ -14,7 +14,7 @@ import java.util.List;
 public class OrderDTO {
     private Long id;
 
-    private User user;
+    private Long userid;
 
     @NotNull
     private BigDecimal shipping;

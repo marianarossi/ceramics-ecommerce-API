@@ -7,7 +7,9 @@ import java.math.BigDecimal;
 @Data
 
 public class ResponseOrderItemDTO {
-    private Product product;
+//    private Long productId;
+
+    private String productName;
 
     private BigDecimal price;
 

@@ -10,4 +10,6 @@ public interface IListService<T, ID extends Serializable> {
     List<T> findAll();
     Page<T> findAll(Pageable pageable);
     T findOne(ID id);
+    boolean exists(ID id);
+    long count();
 }

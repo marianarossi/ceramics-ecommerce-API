@@ -11,13 +11,14 @@ import java.util.List;
 public class ResponseOrderDTO {
     private LocalDateTime date;
 
-//    private User user;
-
-    private List<OrderItemDTO> items;
+//    private Long userId;
 
     private BigDecimal shipping;
 
     private String status;
 
     private String payment;
+
+    private List<ResponseOrderItemDTO> items; // Explicitly include order items here
+
 }

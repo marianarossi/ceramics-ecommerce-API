@@ -75,7 +75,6 @@ public abstract class CrudController <T, D, R, ID extends Serializable> {
         }
     }
 
-
     @PostMapping
     public ResponseEntity<R> create(@RequestBody @Valid D entityDto) {
         T entity = convertToEntity(entityDto);
@@ -94,15 +93,15 @@ public abstract class CrudController <T, D, R, ID extends Serializable> {
         return ResponseEntity.ok(getService().exists(id));
     }
 
-    @GetMapping("count")
-    public ResponseEntity<Long> count() {
-        return ResponseEntity.ok(getService().count());
-    }
-
     @DeleteMapping("{id}")
     public ResponseEntity<Void> delete(@PathVariable ID id) {
         getService().delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("count")
+    public ResponseEntity<Long> count() {
+        return ResponseEntity.ok(getService().count());
     }
 }
 

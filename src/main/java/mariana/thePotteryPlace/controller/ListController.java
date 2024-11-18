@@ -73,4 +73,14 @@ public abstract class ListController <T, D, R, ID extends Serializable> {
             return ResponseEntity.noContent().build();
         }
     }
+
+    @GetMapping("exists/{id}")
+    public ResponseEntity<Boolean> exists(@PathVariable ID id) {
+        return ResponseEntity.ok(getService().exists(id));
+    }
+
+    @GetMapping("count")
+    public ResponseEntity<Long> count() {
+        return ResponseEntity.ok(getService().count());
+    }
 }

@@ -20,11 +20,6 @@ public abstract class CrudServiceImpl<T, ID extends Serializable> implements ICr
     }
 
     @Override
-    public List<T> findAll(Sort sort) {
-        return getRepository().findAll(sort);
-    }
-
-    @Override
     public Page<T> findAll(Pageable pageable) {
         return getRepository().findAll(pageable);
     }
@@ -34,20 +29,6 @@ public abstract class CrudServiceImpl<T, ID extends Serializable> implements ICr
         return getRepository().save(entity);
     }
 
-    @Override
-    public T saveAndFlush(T entity) {
-        return getRepository().saveAndFlush(entity);
-    }
-
-    @Override
-    public Iterable<T> save(Iterable<T> iterable) {
-        return getRepository().saveAll(iterable);
-    }
-
-    @Override
-    public void flush() {
-        getRepository().flush();
-    }
 
     @Override
     public T findOne(ID id) {
@@ -70,13 +51,31 @@ public abstract class CrudServiceImpl<T, ID extends Serializable> implements ICr
         getRepository().deleteById(id);
     }
 
-    @Override
-    public void delete(Iterable<? extends T> iterable) {
-        getRepository().deleteAll(iterable);
-    }
-
-    @Override
-    public void deleteAll() {
-        getRepository().deleteAll();
-    }
+//    @Override
+//    public List<T> findAll(Sort sort) {
+//        return getRepository().findAll(sort);
+//    }
+//    @Override
+//    public T saveAndFlush(T entity) {
+//        return getRepository().saveAndFlush(entity);
+//    }
+//
+//    @Override
+//    public Iterable<T> save(Iterable<T> iterable) {
+//        return getRepository().saveAll(iterable);
+//    }
+//
+//    @Override
+//    public void flush() {
+//        getRepository().flush();
+//    }
+//    @Override
+//    public void delete(Iterable<? extends T> iterable) {
+//        getRepository().deleteAll(iterable);
+//    }
+//
+//    @Override
+//    public void deleteAll() {
+//        getRepository().deleteAll();
+//    }
 }

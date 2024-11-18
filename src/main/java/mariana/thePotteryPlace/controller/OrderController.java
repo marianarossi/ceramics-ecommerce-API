@@ -6,12 +6,16 @@ import mariana.thePotteryPlace.model.Order;
 import mariana.thePotteryPlace.service.ICrudService;
 import mariana.thePotteryPlace.service.IOrderService;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("order")
@@ -37,18 +41,33 @@ public class OrderController extends CrudController<Order, OrderDTO, ResponseOrd
 
     @Override
     public ResponseEntity<ResponseOrderDTO> create(OrderDTO entity) {
-        orderService.saveCompleteOrder(entity);
-        return ResponseEntity.ok(modelMapper.map(entity, ResponseOrderDTO.class));
+        OrderDTO savedOrderDTO = orderService.saveCompleteOrder(entity);
+        ResponseOrderDTO responseOrderDTO = modelMapper.map(savedOrderDTO, ResponseOrderDTO.class);
+
+        return ResponseEntity.ok(responseOrderDTO);
     }
 
     @Override
     public ResponseEntity<List<ResponseOrderDTO>> findAll() {
-        List<Order> userOrders = orderService.findOrdersByUser();
+        // Fetch all orders for the authenticated user (with their items)
+        return orderService.findOrdersByUser();
+    }
 
-        List<ResponseOrderDTO> responseOrders = userOrders.stream()
-                .map(order -> modelMapper.map(order, ResponseOrderDTO.class))
-                .collect(Collectors.toList());
 
-        return ResponseEntity.ok(responseOrders);
+    @Override
+    public ResponseEntity<Page<ResponseOrderDTO>> findAll(int page, int size, String order, Boolean asc) {
+        if (order == null) {
+            order = "date"; // sorts by date
+        }
+        if (asc == null) {
+            asc = true; // Default to ascending
+        }
+
+        return orderService.findPageableOrdersByUser(page, size, order, asc);
+    }
+
+    @Override
+    public ResponseEntity<ResponseOrderDTO> findOne(@PathVariable Long id) {
+        return ResponseEntity.ok(orderService.findOrderById(id));
     }
 }
