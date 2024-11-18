@@ -1,16 +1,14 @@
-package mariana.thePotteryPlace.dto;
+package mariana.thePotteryPlace.dto.request;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import mariana.thePotteryPlace.model.User;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor //precisa?
 public class AddressDTO {
-    private Long id;
 
     @NotNull
     private String street;
@@ -35,7 +33,4 @@ public class AddressDTO {
 
     @NotNull
     private String zip;
-
-    //anotacao do banco aqui?
-    private User user;
 }

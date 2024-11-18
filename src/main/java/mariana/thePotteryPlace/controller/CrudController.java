@@ -71,7 +71,7 @@ public abstract class CrudController <T, D, R, ID extends Serializable> {
         if (entity != null) {
             return ResponseEntity.ok(convertToResponseDto(entity));
         } else {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.notFound().build();
         }
     }
 
@@ -83,9 +83,19 @@ public abstract class CrudController <T, D, R, ID extends Serializable> {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<D> update(@PathVariable ID id, @RequestBody @Valid D entity) {
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(convertToDto(getService().save(convertToEntity(entity))));
+    public ResponseEntity<R> update(@PathVariable ID id, @RequestBody @Valid D dto) {
+        T entity = getService().findOne(id);
+
+        if (entity == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        getModelMapper().map(dto, entity);
+
+        T updatedEntity = getService().save(entity);
+
+        R responseDTO = getModelMapper().map(updatedEntity, (Class<R>) dto.getClass());
+
+        return ResponseEntity.status(HttpStatus.OK).body(responseDTO);
     }
 
     @GetMapping("exists/{id}")

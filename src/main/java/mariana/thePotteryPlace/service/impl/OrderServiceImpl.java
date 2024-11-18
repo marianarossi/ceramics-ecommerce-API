@@ -1,9 +1,11 @@
 package mariana.thePotteryPlace.service.impl;
 
-import mariana.thePotteryPlace.dto.OrderDTO;
-import mariana.thePotteryPlace.dto.OrderItemDTO;
-import mariana.thePotteryPlace.dto.Response.ResponseOrderDTO;
-import mariana.thePotteryPlace.dto.Response.ResponseOrderItemDTO;
+import mariana.thePotteryPlace.dto.request.OrderDTO;
+import mariana.thePotteryPlace.dto.request.OrderItemDTO;
+import mariana.thePotteryPlace.dto.response.ResponseOrderDTO;
+import mariana.thePotteryPlace.dto.response.ResponseOrderItemDTO;
+import mariana.thePotteryPlace.error.AccessDeniedException;
+import mariana.thePotteryPlace.error.ResourceNotFoundException;
 import mariana.thePotteryPlace.model.Order;
 import mariana.thePotteryPlace.model.OrderItem;
 import mariana.thePotteryPlace.model.Product;
@@ -44,7 +46,7 @@ public class OrderServiceImpl extends CrudServiceImpl<Order, Long> implements IO
     }
 
    public OrderDTO saveCompleteOrder(OrderDTO orderDTO) {
-        Order order = new Order();
+       Order order = new Order();
         order.setDate(LocalDateTime.now());
         order.setUser(authService.getAuthenticatedUser());
         order.setStatus("Waiting confirmation");
@@ -66,10 +68,30 @@ public class OrderServiceImpl extends CrudServiceImpl<Order, Long> implements IO
             orderItemRepository.save(item);
         }
 
-        orderDTO.setId(order.getId());
         orderDTO.setUserid(order.getUser().getId());
         return orderDTO;
    }
+
+    public void deleteOrderIfOwner(Long orderId) {
+        Order order = orderRepository.findById(orderId).orElse(null);
+
+        if (order == null) {
+            throw new
+                    ResourceNotFoundException("Order not found"); // You can throw a custom exception for not found
+        }
+
+        User authenticatedUser = authService.getAuthenticatedUser(); // Get the authenticated user
+
+        if (!order.getUser().getId().equals(authenticatedUser.getId())) {
+            throw new AccessDeniedException("You do not have permission to delete this order"); // Custom exception for access denial
+        }
+
+        orderItemRepository.deleteByOrderId(orderId);
+
+
+        orderRepository.delete(order); // Proceed with the deletion
+    }
+
 
     public ResponseOrderDTO findOrderById(Long orderId) {
         Order order = orderRepository.findById(orderId)

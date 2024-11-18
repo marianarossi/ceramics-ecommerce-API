@@ -1,4 +1,4 @@
-package mariana.thePotteryPlace.dto.Response;
+package mariana.thePotteryPlace.dto.response;
 
 import lombok.Data;
 import java.math.BigDecimal;
@@ -6,8 +6,8 @@ import java.math.BigDecimal;
 @Data
 public class ResponseProductDTO {
     private String title;
-    private String description;
 
+    private String text;
 
     private BigDecimal price;
 

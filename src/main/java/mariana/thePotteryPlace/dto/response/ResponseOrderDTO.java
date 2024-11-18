@@ -1,7 +1,6 @@
-package mariana.thePotteryPlace.dto.Response;
+package mariana.thePotteryPlace.dto.response;
 
 import lombok.Data;
-import mariana.thePotteryPlace.dto.OrderItemDTO;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

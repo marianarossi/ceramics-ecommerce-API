@@ -1,7 +1,7 @@
 package mariana.thePotteryPlace.controller;
 
-import mariana.thePotteryPlace.dto.OrderItemDTO;
-import mariana.thePotteryPlace.dto.Response.ResponseOrderItemDTO;
+import mariana.thePotteryPlace.dto.request.OrderItemDTO;
+import mariana.thePotteryPlace.dto.response.ResponseOrderItemDTO;
 import mariana.thePotteryPlace.model.OrderItem;
 import mariana.thePotteryPlace.service.ICrudService;
 import mariana.thePotteryPlace.service.IOrderItemService;

@@ -1,10 +1,10 @@
-package mariana.thePotteryPlace.dto;
+package mariana.thePotteryPlace.dto.request;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import mariana.thePotteryPlace.model.Address;
-import mariana.thePotteryPlace.model.User;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -12,8 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor //precisa?
 public class OrderDTO {
-    private Long id;
-
     private Long userid;
 
     @NotNull

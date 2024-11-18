@@ -1,4 +1,4 @@
-package mariana.thePotteryPlace.dto;
+package mariana.thePotteryPlace.dto.request;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -12,8 +12,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor //precisa?
 public class UserDTO {
-    private Long id;
-
     @NotNull(message = "User can't be null.")
     @Size(min = 4, max = 50)
     private String email;

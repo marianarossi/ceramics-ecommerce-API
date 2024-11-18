@@ -1,7 +1,6 @@
-package mariana.thePotteryPlace.dto.Response;
+package mariana.thePotteryPlace.dto.response;
 
 import lombok.Data;
-import mariana.thePotteryPlace.model.Product;
 
 import java.math.BigDecimal;
 @Data

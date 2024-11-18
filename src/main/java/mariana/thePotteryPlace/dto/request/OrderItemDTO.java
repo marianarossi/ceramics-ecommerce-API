@@ -1,4 +1,4 @@
-package mariana.thePotteryPlace.dto;
+package mariana.thePotteryPlace.dto.request;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

@@ -2,6 +2,7 @@ package mariana.thePotteryPlace.error;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -44,5 +45,13 @@ public class ExceptionHandlerAdvice {
                                                HttpServletRequest request) {
         return new ApiError(HttpStatus.BAD_REQUEST.value(), "Validation error!",
                 request.getServletPath(), null);
+    }
+
+    @ExceptionHandler(UnauthorizedAccessException.class)
+    public ResponseEntity<ApiError> handleUnauthorizedAccessException(UnauthorizedAccessException ex,
+                                                                      HttpServletRequest request) {
+        ApiError apiError = new ApiError(HttpStatus.FORBIDDEN.value(), ex.getMessage(),
+                request.getServletPath(), null);
+        return new ResponseEntity<>(apiError, HttpStatus.FORBIDDEN);
     }
 }

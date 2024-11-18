@@ -1,4 +1,4 @@
-package mariana.thePotteryPlace.controller;
+package mariana.thePotteryPlace.controller.readOnly;
 
 import mariana.thePotteryPlace.service.IListService;
 import org.modelmapper.ModelMapper;

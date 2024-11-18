@@ -1,7 +1,8 @@
-package mariana.thePotteryPlace.controller;
+package mariana.thePotteryPlace.controller.readOnly;
 
-import mariana.thePotteryPlace.dto.ProductDTO;
-import mariana.thePotteryPlace.dto.Response.ResponseProductDTO;
+import mariana.thePotteryPlace.dto.request.ProductDTO;
+import mariana.thePotteryPlace.dto.response.ResponseProductDTO;
+import mariana.thePotteryPlace.dto.response.ResponseProductInfoDTO;
 import mariana.thePotteryPlace.model.Product;
 import mariana.thePotteryPlace.service.IListService;
 import mariana.thePotteryPlace.service.IProductService;
@@ -32,6 +33,22 @@ public class ProductController extends ListController<Product, ProductDTO, Respo
                 .map(product -> modelMapper.map(product, ResponseProductDTO.class))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOs);
+    }
+
+    @Override
+    public ResponseEntity<ResponseProductDTO> findOne(Long aLong) {
+        return super.findOne(aLong);
+    }
+
+    @GetMapping("/info/{id}")
+    public ResponseEntity<ResponseProductInfoDTO> findProductInfoById(@PathVariable Long id) {
+        Product product = productService.findOne(id);
+        if (product != null) {
+            ResponseProductInfoDTO productInfoDTO = modelMapper.map(product, ResponseProductInfoDTO.class);
+            return ResponseEntity.ok(productInfoDTO);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
 
     @Override

@@ -1,7 +1,7 @@
-package mariana.thePotteryPlace.controller;
+package mariana.thePotteryPlace.controller.readOnly;
 
-import mariana.thePotteryPlace.dto.CategoryDTO;
-import mariana.thePotteryPlace.dto.Response.ResponseCategoryDTO;
+import mariana.thePotteryPlace.dto.request.CategoryDTO;
+import mariana.thePotteryPlace.dto.response.ResponseCategoryDTO;
 import mariana.thePotteryPlace.model.Category;
 import mariana.thePotteryPlace.service.ICategoryService;
 import mariana.thePotteryPlace.service.IListService;

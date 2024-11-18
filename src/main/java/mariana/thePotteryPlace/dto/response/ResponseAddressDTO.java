@@ -1,4 +1,4 @@
-package mariana.thePotteryPlace.dto.Response;
+package mariana.thePotteryPlace.dto.response;
 
 import lombok.Data;
 
@@ -19,4 +19,5 @@ public class ResponseAddressDTO {
     private String country;
 
     private String zip;
+
 }

@@ -1,4 +1,4 @@
-package mariana.thePotteryPlace.dto.Response;
+package mariana.thePotteryPlace.dto.response;
 
 import lombok.Data;
 import java.time.LocalDate;
