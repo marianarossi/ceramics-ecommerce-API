@@ -6,7 +6,11 @@ import mariana.thePotteryPlace.model.Product;
 import mariana.thePotteryPlace.service.IListService;
 import mariana.thePotteryPlace.service.IProductService;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("products")
@@ -19,6 +23,15 @@ public class ProductController extends ListController<Product, ProductDTO, Respo
         super(Product.class, ProductDTO.class, ResponseProductDTO.class);
         this.productService = productService;
         this.modelMapper = modelMapper;
+    }
+
+    @GetMapping("/category/{id}")
+    public ResponseEntity<List<ResponseProductDTO>> getProductByCategory(@PathVariable Long id) {
+        List<Product> products = productService.getProductsByCategory(id);
+        List<ResponseProductDTO> responseDTOs = products.stream()
+                .map(product -> modelMapper.map(product, ResponseProductDTO.class))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(responseDTOs);
     }
 
     @Override
