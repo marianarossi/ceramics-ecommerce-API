@@ -77,13 +77,13 @@ public class OrderServiceImpl extends CrudServiceImpl<Order, Long> implements IO
 
         if (order == null) {
             throw new
-                    ResourceNotFoundException("Order not found"); // You can throw a custom exception for not found
+                    ResourceNotFoundException("Order not found");
         }
 
         User authenticatedUser = authService.getAuthenticatedUser(); // Get the authenticated user
 
         if (!order.getUser().getId().equals(authenticatedUser.getId())) {
-            throw new AccessDeniedException("You do not have permission to delete this order"); // Custom exception for access denial
+            throw new AccessDeniedException("You do not have permission to delete this order");
         }
 
         orderItemRepository.deleteByOrderId(orderId);

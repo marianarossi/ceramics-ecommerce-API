@@ -35,10 +35,6 @@ public class ProductController extends ListController<Product, ProductDTO, Respo
         return ResponseEntity.ok(responseDTOs);
     }
 
-    @Override
-    public ResponseEntity<ResponseProductDTO> findOne(Long aLong) {
-        return super.findOne(aLong);
-    }
 
     @GetMapping("/info/{id}")
     public ResponseEntity<ResponseProductInfoDTO> findProductInfoById(@PathVariable Long id) {

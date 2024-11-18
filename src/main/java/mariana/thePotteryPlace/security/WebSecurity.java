@@ -56,7 +56,6 @@ public class WebSecurity {
                         .requestMatchers(antMatcher(HttpMethod.GET, "/categories/**")).permitAll()
                         .requestMatchers(antMatcher(HttpMethod.GET, "/addresses/**")).permitAll()
                         .requestMatchers(antMatcher(HttpMethod.POST, "/addresses/**")).permitAll()
-
                         .requestMatchers(antMatcher(HttpMethod.POST, "/error/**")).permitAll()
                         .requestMatchers(antMatcher(HttpMethod.POST, "/users/**")).permitAll()
                         //no projeto, precisa listar sem estar cadastrado
