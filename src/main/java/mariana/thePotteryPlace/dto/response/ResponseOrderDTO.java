@@ -8,6 +8,8 @@ import java.util.List;
 @Data
 
 public class ResponseOrderDTO {
+    private Long id;
+
     private LocalDateTime date;
 
 //    private Long userId;

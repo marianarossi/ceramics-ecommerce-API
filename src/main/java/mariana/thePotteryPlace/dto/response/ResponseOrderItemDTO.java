@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 @Data
 
 public class ResponseOrderItemDTO {
+    private Long id;
+
 //    private Long productId;
 
     private String productName;
