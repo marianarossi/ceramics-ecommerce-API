@@ -12,6 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("users")
 public class UserController extends CrudController<User, UserDTO, ResponseUserDTO, Long> {
@@ -25,6 +28,14 @@ public class UserController extends CrudController<User, UserDTO, ResponseUserDT
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
         this.modelMapper = new ModelMapper();
+    }
+
+    @Override
+    public ResponseEntity<List<ResponseUserDTO>> findAll() {
+        List<User> userbyauth = userService.findUserByAuth();
+        return ResponseEntity.ok(userbyauth.stream()
+                .map(user -> modelMapper.map(user, ResponseUserDTO.class))
+                .collect(Collectors.toList()));
     }
 
     @Override
