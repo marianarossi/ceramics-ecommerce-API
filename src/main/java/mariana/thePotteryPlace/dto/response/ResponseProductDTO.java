@@ -13,6 +13,8 @@ public class ResponseProductDTO {
 
     private BigDecimal price;
 
+    private String installment;
+
     private String img;
 
 }
