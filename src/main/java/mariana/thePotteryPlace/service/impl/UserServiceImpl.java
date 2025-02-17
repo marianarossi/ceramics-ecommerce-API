@@ -33,11 +33,20 @@ public class UserServiceImpl extends CrudServiceImpl<User, Long> implements IUse
 
     @Override
     public User save(User entity) {
-
-        if(userRepository.existsByEmail(entity.getEmail())) {
-            throw new DataIntegrityViolationException("Email already exists");
+        if (entity.getId() == null) {
+            if(userRepository.existsByEmail(entity.getEmail())) {
+                throw new DataIntegrityViolationException("Email already exists");
+            }
+        } else {
+            User existingUser = userRepository.findById(entity.getId())
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+            if (!existingUser.getEmail().equals(entity.getEmail())) {
+                throw new DataIntegrityViolationException("Email can't be changed");
+            }
         }
-        entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+        if (entity.getPassword() != null && !entity.getPassword().trim().isEmpty()) {
+            entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+        }
         return super.save(entity);
     }
 
