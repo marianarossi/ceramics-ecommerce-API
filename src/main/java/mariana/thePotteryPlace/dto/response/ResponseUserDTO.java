@@ -13,6 +13,8 @@ public class ResponseUserDTO {
 
     private LocalDate birthDate;
 
+    private String ssn;
+
     private String gender;
 
     private String phone;
