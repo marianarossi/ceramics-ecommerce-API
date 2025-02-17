@@ -41,4 +41,7 @@ public class Order {
     @NotNull
     private String payment;
 
+    @NotNull
+    private BigDecimal total;
+
 }

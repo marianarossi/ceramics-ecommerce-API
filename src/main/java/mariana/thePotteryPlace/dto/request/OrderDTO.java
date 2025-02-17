@@ -24,4 +24,7 @@ public class OrderDTO {
     private Address address;
 
     List<OrderItemDTO> items;
+
+    @NotNull
+    private BigDecimal total;
 }

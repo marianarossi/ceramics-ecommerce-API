@@ -1,6 +1,7 @@
 package mariana.thePotteryPlace.dto.response;
 
 import lombok.Data;
+import mariana.thePotteryPlace.model.Address;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -20,6 +21,10 @@ public class ResponseOrderDTO {
 
     private String payment;
 
-    private List<ResponseOrderItemDTO> items; // Explicitly include order items here
+    private List<ResponseOrderItemDTO> items;
+
+    private BigDecimal total;
+
+    private Address address;
 
 }

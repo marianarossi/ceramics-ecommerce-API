@@ -53,6 +53,7 @@ public class OrderServiceImpl extends CrudServiceImpl<Order, Long> implements IO
         order.setPayment(orderDTO.getPayment());
         order.setAddress(orderDTO.getAddress());
         order.setShipping(orderDTO.getShipping());
+        order.setTotal(orderDTO.getTotal());
         orderRepository.save(order);
 
         for(OrderItemDTO dtItem : orderDTO.getItems())
