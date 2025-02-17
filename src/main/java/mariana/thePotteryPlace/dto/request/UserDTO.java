@@ -6,35 +6,37 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import mariana.thePotteryPlace.validation.CreateGroup;
+import mariana.thePotteryPlace.validation.UpdateGroup;
 import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor //precisa?
+@NoArgsConstructor
 public class UserDTO {
-    @NotNull(message = "User can't be null.")
-    @Size(min = 4, max = 50)
+    @NotNull(message = "User can't be null.", groups = CreateGroup.class)
+    @Size(min = 4, max = 50, groups = {CreateGroup.class, UpdateGroup.class})
     private String email;
 
-    @NotNull
-    @Size(min = 4, max = 50)
+    @NotNull(message = "Display name is required.", groups = CreateGroup.class)
+    @Size(min = 4, max = 50, groups = {CreateGroup.class, UpdateGroup.class})
     private String displayName;
 
-    @NotNull
-    @Size(min = 6)
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$")
+    @NotNull(message = "Password is required.", groups = CreateGroup.class)
+    @Size(min = 6, groups = {CreateGroup.class, UpdateGroup.class})
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", groups = {CreateGroup.class, UpdateGroup.class})
     private String password;
 
-    @NotNull
-    @Size(min = 9) //max?
+    @NotNull(message = "SSN is required.", groups = CreateGroup.class)
+    @Size(min = 9, groups = {CreateGroup.class, UpdateGroup.class})
     private String ssn;
 
-    @NotNull
+    @NotNull(message = "Birth date is required.", groups = CreateGroup.class)
     private LocalDate birthDate;
 
-    @NotNull
+    @NotNull(message = "Gender is required.", groups = CreateGroup.class)
     private String gender;
 
-    @NotNull
+    @NotNull(message = "Phone is required.", groups = CreateGroup.class)
     private String phone;
 }
