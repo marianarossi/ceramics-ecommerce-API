@@ -7,11 +7,9 @@ import mariana.thePotteryPlace.model.User;
 import mariana.thePotteryPlace.service.ICrudService;
 import mariana.thePotteryPlace.service.IUserService;
 import mariana.thePotteryPlace.validation.UpdateGroup;
-import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,12 +22,10 @@ public class UserController extends CrudController<User, UserDTO, ResponseUserDT
 
     private final IUserService userService;
     private final ModelMapper modelMapper;
-    private final PasswordEncoder passwordEncoder;
 
-    public UserController(IUserService userService, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
+    public UserController(IUserService userService, ModelMapper modelMapper) {
         super(User.class, UserDTO.class, ResponseUserDTO.class);
         this.userService = userService;
-        this.passwordEncoder = passwordEncoder;
         this.modelMapper = new ModelMapper();
     }
 
@@ -50,7 +46,6 @@ public class UserController extends CrudController<User, UserDTO, ResponseUserDT
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
-        // Convert UserDTO to UserUpdateDTO manually (or via ModelMapper)
         UserUpdateDTO updateDto = new UserUpdateDTO();
         updateDto.setDisplayName(dto.getDisplayName());
         updateDto.setPassword(dto.getPassword());
@@ -59,7 +54,6 @@ public class UserController extends CrudController<User, UserDTO, ResponseUserDT
         updateDto.setGender(dto.getGender());
         updateDto.setPhone(dto.getPhone());
 
-        // Update only the allowed fields
         if (updateDto.getDisplayName() != null) {
             existingUser.setDisplayName(updateDto.getDisplayName());
         }
