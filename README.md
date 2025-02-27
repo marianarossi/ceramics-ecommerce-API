@@ -26,8 +26,6 @@ FrontEnd is available at https://github.com/marianarossi/ceramics-eCommerce-Reac
   - **Hibernate Validator:** Implements Java Bean Validation to enforce data constraints on incoming requests.
   - **Apache HttpClient5 (test scope):** Supports HTTP-based integration testing.
 
-*(See details on Spring and related technologies in the project documentation :contentReference[oaicite:0]{index=0}.)*
-
 ## Architecture & Project Structure
 
 The application follows a layered architecture that cleanly separates concerns:
