@@ -22,7 +22,7 @@ FrontEnd is available at https://github.com/marianarossi/ceramics-eCommerce-Reac
 - **Additional Libraries:**  
   - **Java JWT:** Handles the creation and validation of JSON Web Tokens for secure authentication.
   - **ModelMapper:** Facilitates seamless conversion between domain models and Data Transfer Objects (DTOs).
-  - **Lombok:** Reduces boilerplate code by automatically generating getters, setters, and constructors.
+  - **Lombok:** Reduces code by automatically generating getters, setters, and constructors.
   - **Hibernate Validator:** Implements Java Bean Validation to enforce data constraints on incoming requests.
   - **Apache HttpClient5 (test scope):** Supports HTTP-based integration testing.
 
